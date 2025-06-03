@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package scs;
+
+option go_package = "github.com/igntnk/stocky-scs/proto/scs_pb";
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (IdResponse);
+  rpc BlockUser(IdRequest) returns (IdResponse);
+  rpc UnblockUser(IdRequest) returns (IdResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (IdResponse);
+  rpc GetById(IdRequest) returns (UserModel);
+  rpc GetAllUsers(google.protobuf.Empty) returns (GetAllUsersResponse);
+}
+
+message UserModel {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string document_type = 4;
+  string document_number =5;
+  string creation_date = 6;
+  bool blocked = 7;
+  string authId = 8;
+}
+
+message GetAllUsersResponse {
+  repeated UserModel users = 1;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string description = 2;
+  string documentType = 3;
+  string documentNumber = 4;
+  string authId = 5;
+}
+
+message UpdateUserRequest {
+  string name = 1;
+  string description = 2;
+  string documentType = 3;
+  string documentNumber = 4;
+  string id = 6;
+}
+
+message IdRequest {
+  string id = 2;
+}
+
+message IdResponse {
+  string id = 1;
+}

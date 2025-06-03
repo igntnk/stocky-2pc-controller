@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package iims;
+
+option go_package = "github.com/igntnk/stocky_iims/proto/iims_pb";
+
+service ProductService {
+  rpc InsertOne(InsertProductRequest) returns (InsertProductResponse) {};
+  rpc Get(GetProductsRequest) returns (GetProductsResponse) {};
+  rpc GetById(GetByIdProductRequest) returns (GetProductMessage) {};
+  rpc GetByProductCode(GetByProductCodeRequest) returns (GetProductMessage) {};
+  rpc Delete(DeleteProductRequest) returns (google.protobuf.Empty) {};
+  rpc Update(UpdateProductRequest) returns (google.protobuf.Empty) {};
+  rpc BlockProduct(BlockProductOperationMessage) returns (google.protobuf.Empty) {};
+  rpc UnblockProduct(BlockProductOperationMessage) returns (google.protobuf.Empty) {};
+}
+
+message InsertProductRequest {
+  string Name = 1;
+  string Description = 2;
+  string CreationDate = 3;
+  float Price = 4;
+}
+
+message GetByProductCodeRequest{
+  string code = 1;
+}
+
+message GetByIdProductRequest{
+  string id = 1;
+}
+
+message InsertProductResponse {
+  string Id = 1;
+}
+
+message GetProductsRequest{
+  int64 Limit =1;
+  int64 Offset =2;
+}
+
+message GetProductMessage{
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  string CreationDate = 4;
+  string Price = 5;
+}
+
+message GetProductsResponse{
+  repeated GetProductMessage Products = 1;
+}
+
+message DeleteProductRequest{
+  string Id = 1;
+}
+
+message UpdateProductRequest{
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  string CreationDate = 4;
+  float Price = 5;
+}
+
+message BlockProductOperationMessage{
+  string Id = 1;
+}
+
+service SaleService {
+  rpc InsertOne(InsertSaleRequest) returns (InsertSaleResponse) {};
+  rpc Get(GetSalesRequest) returns (GetSalesResponse) {};
+  rpc Delete(DeleteSaleRequest) returns (google.protobuf.Empty) {};
+  rpc Update(UpdateSaleRequest) returns (google.protobuf.Empty) {};
+  rpc BlockSale(BlockSaleOperationMessage) returns (google.protobuf.Empty) {};
+  rpc UnblockSale(BlockSaleOperationMessage) returns (google.protobuf.Empty) {};
+}
+
+message InsertSaleRequest {
+  string Name = 1;
+  string Description = 2;
+  int32 SaleSize = 3;
+  string Product = 4;
+}
+
+message InsertSaleResponse {
+  string Id = 1;
+}
+
+message GetSalesRequest{
+  int64 Limit =1;
+  int64 Offset =2;
+}
+
+message GetSaleMessage{
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  int32 SaleSize = 4;
+  string Product = 5;
+}
+
+message GetSalesResponse{
+  repeated GetSaleMessage Sales = 1;
+}
+
+message DeleteSaleRequest{
+  string Id = 1;
+}
+
+message UpdateSaleRequest{
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  int32 SaleSize = 4;
+}
+
+message BlockSaleOperationMessage{
+  string Id = 1;
+}

@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package sms;
+
+option go_package = "github.com/igntnk/stocky-sms/proto/sms_pb";
+
+service ProductService {
+  rpc CreateProduct(CreateProductMessage) returns (UuidResponse);
+  rpc DeleteProduct(UuidRequest) returns (UuidResponse);
+  rpc SetStoreCost(SetProductCostRequest) returns (UuidResponse);
+  rpc SetStoreAmount(SetProductAmountRequest) returns (UuidResponse);
+  rpc GetStoreAmount(UuidRequest) returns (GetStoreAmountResponse);
+}
+
+message CreateProductMessage {
+  float storeCost = 1;
+}
+
+message UuidResponse {
+  string uuid = 1;
+}
+
+message UuidRequest {
+  string uuid = 1;
+}
+
+message SetProductCostRequest {
+  string uuid = 1;
+  float storeCost = 2;
+}
+
+message SetProductAmountRequest {
+  string uuid = 1;
+  float storeAmount = 2;
+}
+
+message GetStoreAmountResponse {
+  float storeAmount = 1;
+}
+
+message SupplyProductModel {
+  string productUuid = 1;
+  float amount = 2;
+}
+
+service SupplyService {
+  rpc CreateSupply(CreateSupplyRequest) returns (UuidResponse) ;
+  rpc DeleteSupply(UuidRequest) returns (UuidResponse) ;
+  rpc UpdateSupplyInfo(UpdateSupplyInfoRequest) returns(UuidResponse) ;
+  rpc GetActiveSupplies(google.protobuf.Empty) returns(GetActiveSuppliesResponse) ;
+  rpc GetSupplyById(UuidRequest) returns (SupplyModel) ;
+}
+
+message CreateSupplyRequest {
+  float supplyCost = 1;
+  string desiredDate = 2;
+  string comment = 3;
+  string responsibleUser = 4;
+  repeated SupplyProductModel products = 5;
+}
+
+message UpdateSupplyInfoRequest {
+  string uuid = 1;
+  string comment = 2;
+  string desiredDate = 3;
+  string status = 4;
+  string responsibleUser = 5;
+  float cost = 6;
+}
+
+message SupplyModel {
+  string uuid = 1;
+  string comment = 2;
+  string desiredDate = 3;
+  string status = 4;
+  string responsibleUser = 5;
+  float cost = 6;
+}
+
+message GetActiveSuppliesResponse {
+  repeated SupplyModel supplies = 1;
+}

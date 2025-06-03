@@ -1,0 +1,22 @@
+rest_server:
+  port: ""
+oms:
+  address: ""
+  insecure: true
+  timeout: 5s
+  tries: 5
+scs:
+  address: ""
+  insecure: true
+  timeout: 5s
+  tries: 5
+sms:
+  address: ""
+  insecure: true
+  timeout: 5s
+  tries: 5
+iims:
+  address: ""
+  insecure: true
+  timeout: 5s
+  tries: 5
