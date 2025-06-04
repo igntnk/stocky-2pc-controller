@@ -20,13 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_CreateProduct_FullMethodName         = "/sms.ProductService/CreateProduct"
-	ProductService_DeleteProduct_FullMethodName         = "/sms.ProductService/DeleteProduct"
-	ProductService_SetStoreCost_FullMethodName          = "/sms.ProductService/SetStoreCost"
-	ProductService_SetStoreAmount_FullMethodName        = "/sms.ProductService/SetStoreAmount"
-	ProductService_GetStoreAmount_FullMethodName        = "/sms.ProductService/GetStoreAmount"
-	ProductService_RemoveCoupleProducts_FullMethodName  = "/sms.ProductService/RemoveCoupleProducts"
-	ProductService_WriteOnCoupleProducts_FullMethodName = "/sms.ProductService/WriteOnCoupleProducts"
+	ProductService_CreateProduct_FullMethodName             = "/sms.ProductService/CreateProduct"
+	ProductService_DeleteProduct_FullMethodName             = "/sms.ProductService/DeleteProduct"
+	ProductService_SetStoreCost_FullMethodName              = "/sms.ProductService/SetStoreCost"
+	ProductService_SetStoreAmount_FullMethodName            = "/sms.ProductService/SetStoreAmount"
+	ProductService_GetStoreAmount_FullMethodName            = "/sms.ProductService/GetStoreAmount"
+	ProductService_RemoveCoupleProducts_FullMethodName      = "/sms.ProductService/RemoveCoupleProducts"
+	ProductService_WriteOnCoupleProducts_FullMethodName     = "/sms.ProductService/WriteOnCoupleProducts"
+	ProductService_ChangeCoupleProductAmount_FullMethodName = "/sms.ProductService/ChangeCoupleProductAmount"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -40,6 +41,7 @@ type ProductServiceClient interface {
 	GetStoreAmount(ctx context.Context, in *UuidRequest, opts ...grpc.CallOption) (*GetStoreAmountResponse, error)
 	RemoveCoupleProducts(ctx context.Context, in *RemoveProductsRequest, opts ...grpc.CallOption) (*CoupleUuidResponse, error)
 	WriteOnCoupleProducts(ctx context.Context, in *RemoveProductsRequest, opts ...grpc.CallOption) (*CoupleUuidResponse, error)
+	ChangeCoupleProductAmount(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[RemoveProductsRequest, CoupleUuidResponse], error)
 }
 
 type productServiceClient struct {
@@ -120,6 +122,19 @@ func (c *productServiceClient) WriteOnCoupleProducts(ctx context.Context, in *Re
 	return out, nil
 }
 
+func (c *productServiceClient) ChangeCoupleProductAmount(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[RemoveProductsRequest, CoupleUuidResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &ProductService_ServiceDesc.Streams[0], ProductService_ChangeCoupleProductAmount_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[RemoveProductsRequest, CoupleUuidResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type ProductService_ChangeCoupleProductAmountClient = grpc.BidiStreamingClient[RemoveProductsRequest, CoupleUuidResponse]
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
@@ -131,6 +146,7 @@ type ProductServiceServer interface {
 	GetStoreAmount(context.Context, *UuidRequest) (*GetStoreAmountResponse, error)
 	RemoveCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error)
 	WriteOnCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error)
+	ChangeCoupleProductAmount(grpc.BidiStreamingServer[RemoveProductsRequest, CoupleUuidResponse]) error
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -161,6 +177,9 @@ func (UnimplementedProductServiceServer) RemoveCoupleProducts(context.Context, *
 }
 func (UnimplementedProductServiceServer) WriteOnCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WriteOnCoupleProducts not implemented")
+}
+func (UnimplementedProductServiceServer) ChangeCoupleProductAmount(grpc.BidiStreamingServer[RemoveProductsRequest, CoupleUuidResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method ChangeCoupleProductAmount not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 func (UnimplementedProductServiceServer) testEmbeddedByValue()                        {}
@@ -309,6 +328,13 @@ func _ProductService_WriteOnCoupleProducts_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_ChangeCoupleProductAmount_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ProductServiceServer).ChangeCoupleProductAmount(&grpc.GenericServerStream[RemoveProductsRequest, CoupleUuidResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type ProductService_ChangeCoupleProductAmountServer = grpc.BidiStreamingServer[RemoveProductsRequest, CoupleUuidResponse]
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -345,7 +371,14 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProductService_WriteOnCoupleProducts_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ChangeCoupleProductAmount",
+			Handler:       _ProductService_ChangeCoupleProductAmount_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "sms.proto",
 }
 

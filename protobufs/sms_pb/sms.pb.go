@@ -779,7 +779,7 @@ const file_sms_proto_rawDesc = "" +
 	"\x0fresponsibleUser\x18\x05 \x01(\tR\x0fresponsibleUser\x12\x12\n" +
 	"\x04cost\x18\x06 \x01(\x02R\x04cost\"I\n" +
 	"\x19GetActiveSuppliesResponse\x12,\n" +
-	"\bsupplies\x18\x01 \x03(\v2\x10.sms.SupplyModelR\bsupplies2\xe3\x03\n" +
+	"\bsupplies\x18\x01 \x03(\v2\x10.sms.SupplyModelR\bsupplies2\xb9\x04\n" +
 	"\x0eProductService\x12=\n" +
 	"\rCreateProduct\x12\x19.sms.CreateProductMessage\x1a\x11.sms.UuidResponse\x124\n" +
 	"\rDeleteProduct\x12\x10.sms.UuidRequest\x1a\x11.sms.UuidResponse\x12=\n" +
@@ -787,7 +787,8 @@ const file_sms_proto_rawDesc = "" +
 	"\x0eSetStoreAmount\x12\x1c.sms.SetProductAmountRequest\x1a\x11.sms.UuidResponse\x12?\n" +
 	"\x0eGetStoreAmount\x12\x10.sms.UuidRequest\x1a\x1b.sms.GetStoreAmountResponse\x12K\n" +
 	"\x14RemoveCoupleProducts\x12\x1a.sms.RemoveProductsRequest\x1a\x17.sms.CoupleUuidResponse\x12L\n" +
-	"\x15WriteOnCoupleProducts\x12\x1a.sms.RemoveProductsRequest\x1a\x17.sms.CoupleUuidResponse2\xc8\x02\n" +
+	"\x15WriteOnCoupleProducts\x12\x1a.sms.RemoveProductsRequest\x1a\x17.sms.CoupleUuidResponse\x12T\n" +
+	"\x19ChangeCoupleProductAmount\x12\x1a.sms.RemoveProductsRequest\x1a\x17.sms.CoupleUuidResponse(\x010\x012\xc8\x02\n" +
 	"\rSupplyService\x12;\n" +
 	"\fCreateSupply\x12\x18.sms.CreateSupplyRequest\x1a\x11.sms.UuidResponse\x123\n" +
 	"\fDeleteSupply\x12\x10.sms.UuidRequest\x1a\x11.sms.UuidResponse\x12C\n" +
@@ -835,25 +836,27 @@ var file_sms_proto_depIdxs = []int32{
 	3,  // 7: sms.ProductService.GetStoreAmount:input_type -> sms.UuidRequest
 	5,  // 8: sms.ProductService.RemoveCoupleProducts:input_type -> sms.RemoveProductsRequest
 	5,  // 9: sms.ProductService.WriteOnCoupleProducts:input_type -> sms.RemoveProductsRequest
-	9,  // 10: sms.SupplyService.CreateSupply:input_type -> sms.CreateSupplyRequest
-	3,  // 11: sms.SupplyService.DeleteSupply:input_type -> sms.UuidRequest
-	10, // 12: sms.SupplyService.UpdateSupplyInfo:input_type -> sms.UpdateSupplyInfoRequest
-	13, // 13: sms.SupplyService.GetActiveSupplies:input_type -> google.protobuf.Empty
-	3,  // 14: sms.SupplyService.GetSupplyById:input_type -> sms.UuidRequest
-	2,  // 15: sms.ProductService.CreateProduct:output_type -> sms.UuidResponse
-	2,  // 16: sms.ProductService.DeleteProduct:output_type -> sms.UuidResponse
-	2,  // 17: sms.ProductService.SetStoreCost:output_type -> sms.UuidResponse
-	2,  // 18: sms.ProductService.SetStoreAmount:output_type -> sms.UuidResponse
-	7,  // 19: sms.ProductService.GetStoreAmount:output_type -> sms.GetStoreAmountResponse
-	1,  // 20: sms.ProductService.RemoveCoupleProducts:output_type -> sms.CoupleUuidResponse
-	1,  // 21: sms.ProductService.WriteOnCoupleProducts:output_type -> sms.CoupleUuidResponse
-	2,  // 22: sms.SupplyService.CreateSupply:output_type -> sms.UuidResponse
-	2,  // 23: sms.SupplyService.DeleteSupply:output_type -> sms.UuidResponse
-	2,  // 24: sms.SupplyService.UpdateSupplyInfo:output_type -> sms.UuidResponse
-	12, // 25: sms.SupplyService.GetActiveSupplies:output_type -> sms.GetActiveSuppliesResponse
-	11, // 26: sms.SupplyService.GetSupplyById:output_type -> sms.SupplyModel
-	15, // [15:27] is the sub-list for method output_type
-	3,  // [3:15] is the sub-list for method input_type
+	5,  // 10: sms.ProductService.ChangeCoupleProductAmount:input_type -> sms.RemoveProductsRequest
+	9,  // 11: sms.SupplyService.CreateSupply:input_type -> sms.CreateSupplyRequest
+	3,  // 12: sms.SupplyService.DeleteSupply:input_type -> sms.UuidRequest
+	10, // 13: sms.SupplyService.UpdateSupplyInfo:input_type -> sms.UpdateSupplyInfoRequest
+	13, // 14: sms.SupplyService.GetActiveSupplies:input_type -> google.protobuf.Empty
+	3,  // 15: sms.SupplyService.GetSupplyById:input_type -> sms.UuidRequest
+	2,  // 16: sms.ProductService.CreateProduct:output_type -> sms.UuidResponse
+	2,  // 17: sms.ProductService.DeleteProduct:output_type -> sms.UuidResponse
+	2,  // 18: sms.ProductService.SetStoreCost:output_type -> sms.UuidResponse
+	2,  // 19: sms.ProductService.SetStoreAmount:output_type -> sms.UuidResponse
+	7,  // 20: sms.ProductService.GetStoreAmount:output_type -> sms.GetStoreAmountResponse
+	1,  // 21: sms.ProductService.RemoveCoupleProducts:output_type -> sms.CoupleUuidResponse
+	1,  // 22: sms.ProductService.WriteOnCoupleProducts:output_type -> sms.CoupleUuidResponse
+	1,  // 23: sms.ProductService.ChangeCoupleProductAmount:output_type -> sms.CoupleUuidResponse
+	2,  // 24: sms.SupplyService.CreateSupply:output_type -> sms.UuidResponse
+	2,  // 25: sms.SupplyService.DeleteSupply:output_type -> sms.UuidResponse
+	2,  // 26: sms.SupplyService.UpdateSupplyInfo:output_type -> sms.UuidResponse
+	12, // 27: sms.SupplyService.GetActiveSupplies:output_type -> sms.GetActiveSuppliesResponse
+	11, // 28: sms.SupplyService.GetSupplyById:output_type -> sms.SupplyModel
+	16, // [16:29] is the sub-list for method output_type
+	3,  // [3:16] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
 	3,  // [3:3] is the sub-list for extension extendee
 	0,  // [0:3] is the sub-list for field type_name

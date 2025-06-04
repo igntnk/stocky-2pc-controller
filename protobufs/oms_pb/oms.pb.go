@@ -26,25 +26,25 @@ const (
 type OrderStatus int32
 
 const (
-	OrderStatus_NEW        OrderStatus = 0
-	OrderStatus_PROCESSING OrderStatus = 1
-	OrderStatus_COMPLETED  OrderStatus = 2
-	OrderStatus_CANCELLED  OrderStatus = 3
+	OrderStatus_new        OrderStatus = 0
+	OrderStatus_processing OrderStatus = 1
+	OrderStatus_completed  OrderStatus = 2
+	OrderStatus_canceled   OrderStatus = 3
 )
 
 // Enum value maps for OrderStatus.
 var (
 	OrderStatus_name = map[int32]string{
-		0: "NEW",
-		1: "PROCESSING",
-		2: "COMPLETED",
-		3: "CANCELLED",
+		0: "new",
+		1: "processing",
+		2: "completed",
+		3: "canceled",
 	}
 	OrderStatus_value = map[string]int32{
-		"NEW":        0,
-		"PROCESSING": 1,
-		"COMPLETED":  2,
-		"CANCELLED":  3,
+		"new":        0,
+		"processing": 1,
+		"completed":  2,
+		"canceled":   3,
 	}
 )
 
@@ -599,7 +599,7 @@ func (x *Order) GetStatus() OrderStatus {
 	if x != nil {
 		return x.Status
 	}
-	return OrderStatus_NEW
+	return OrderStatus_new
 }
 
 func (x *Order) GetCreationDate() *timestamppb.Timestamp {
@@ -928,7 +928,7 @@ func (x *ListOrderRequest) GetStatus() OrderStatus {
 	if x != nil {
 		return x.Status
 	}
-	return OrderStatus_NEW
+	return OrderStatus_new
 }
 
 type ListOrderResponse struct {
@@ -1032,7 +1032,7 @@ func (x *UpdateOrderRequest) GetStatus() OrderStatus {
 	if x != nil && x.Status != nil {
 		return *x.Status
 	}
-	return OrderStatus_NEW
+	return OrderStatus_new
 }
 
 type DeleteOrderRequest struct {
@@ -1210,13 +1210,13 @@ const file_oms_proto_rawDesc = "" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"3\n" +
 	"\x12GetProductsRequest\x12\x1d\n" +
 	"\n" +
-	"order_uuid\x18\x01 \x01(\tR\torderUuid*D\n" +
+	"order_uuid\x18\x01 \x01(\tR\torderUuid*C\n" +
 	"\vOrderStatus\x12\a\n" +
-	"\x03NEW\x10\x00\x12\x0e\n" +
+	"\x03new\x10\x00\x12\x0e\n" +
 	"\n" +
-	"PROCESSING\x10\x01\x12\r\n" +
-	"\tCOMPLETED\x10\x02\x12\r\n" +
-	"\tCANCELLED\x10\x032\xaa\x02\n" +
+	"processing\x10\x01\x12\r\n" +
+	"\tcompleted\x10\x02\x12\f\n" +
+	"\bcanceled\x10\x032\xaa\x02\n" +
 	"\x0eProductService\x12*\n" +
 	"\x06Create\x12\x12.oms.CreateRequest\x1a\f.oms.Product\x12$\n" +
 	"\x03Get\x12\x0f.oms.GetRequest\x1a\f.oms.Product\x12+\n" +
@@ -1224,7 +1224,7 @@ const file_oms_proto_rawDesc = "" +
 	"\x06Update\x12\x12.oms.UpdateRequest\x1a\f.oms.Product\x124\n" +
 	"\x06Delete\x12\x12.oms.DeleteRequest\x1a\x16.google.protobuf.Empty\x127\n" +
 	"\n" +
-	"GetByOrder\x12\x16.oms.GetByOrderRequest\x1a\x11.oms.ListResponse2\xc2\x02\n" +
+	"GetByOrder\x12\x16.oms.GetByOrderRequest\x1a\x11.oms.ListResponse2\xfd\x02\n" +
 	"\fOrderService\x12-\n" +
 	"\x06Create\x12\x17.oms.CreateOrderRequest\x1a\n" +
 	".oms.Order\x12'\n" +
@@ -1234,7 +1234,9 @@ const file_oms_proto_rawDesc = "" +
 	"\x06Update\x12\x17.oms.UpdateOrderRequest\x1a\n" +
 	".oms.Order\x129\n" +
 	"\x06Delete\x12\x17.oms.DeleteOrderRequest\x1a\x16.google.protobuf.Empty\x129\n" +
-	"\vGetProducts\x12\x17.oms.GetProductsRequest\x1a\x11.oms.ListResponseB6Z4github.com/igntnk/stocky-2pc-controller/proto/oms_pbb\x06proto3"
+	"\vGetProducts\x12\x17.oms.GetProductsRequest\x1a\x11.oms.ListResponse\x129\n" +
+	"\x0eTCCCreateOrder\x12\x17.oms.CreateOrderRequest\x1a\n" +
+	".oms.Order(\x010\x01B6Z4github.com/igntnk/stocky-2pc-controller/proto/oms_pbb\x06proto3"
 
 var (
 	file_oms_proto_rawDescOnce sync.Once
@@ -1298,20 +1300,22 @@ var file_oms_proto_depIdxs = []int32{
 	16, // 21: oms.OrderService.Update:input_type -> oms.UpdateOrderRequest
 	17, // 22: oms.OrderService.Delete:input_type -> oms.DeleteOrderRequest
 	18, // 23: oms.OrderService.GetProducts:input_type -> oms.GetProductsRequest
-	1,  // 24: oms.ProductService.Create:output_type -> oms.Product
-	1,  // 25: oms.ProductService.Get:output_type -> oms.Product
-	6,  // 26: oms.ProductService.List:output_type -> oms.ListResponse
-	1,  // 27: oms.ProductService.Update:output_type -> oms.Product
-	20, // 28: oms.ProductService.Delete:output_type -> google.protobuf.Empty
-	6,  // 29: oms.ProductService.GetByOrder:output_type -> oms.ListResponse
-	9,  // 30: oms.OrderService.Create:output_type -> oms.Order
-	9,  // 31: oms.OrderService.Get:output_type -> oms.Order
-	15, // 32: oms.OrderService.List:output_type -> oms.ListOrderResponse
-	9,  // 33: oms.OrderService.Update:output_type -> oms.Order
-	20, // 34: oms.OrderService.Delete:output_type -> google.protobuf.Empty
-	6,  // 35: oms.OrderService.GetProducts:output_type -> oms.ListResponse
-	24, // [24:36] is the sub-list for method output_type
-	12, // [12:24] is the sub-list for method input_type
+	11, // 24: oms.OrderService.TCCCreateOrder:input_type -> oms.CreateOrderRequest
+	1,  // 25: oms.ProductService.Create:output_type -> oms.Product
+	1,  // 26: oms.ProductService.Get:output_type -> oms.Product
+	6,  // 27: oms.ProductService.List:output_type -> oms.ListResponse
+	1,  // 28: oms.ProductService.Update:output_type -> oms.Product
+	20, // 29: oms.ProductService.Delete:output_type -> google.protobuf.Empty
+	6,  // 30: oms.ProductService.GetByOrder:output_type -> oms.ListResponse
+	9,  // 31: oms.OrderService.Create:output_type -> oms.Order
+	9,  // 32: oms.OrderService.Get:output_type -> oms.Order
+	15, // 33: oms.OrderService.List:output_type -> oms.ListOrderResponse
+	9,  // 34: oms.OrderService.Update:output_type -> oms.Order
+	20, // 35: oms.OrderService.Delete:output_type -> google.protobuf.Empty
+	6,  // 36: oms.OrderService.GetProducts:output_type -> oms.ListResponse
+	9,  // 37: oms.OrderService.TCCCreateOrder:output_type -> oms.Order
+	25, // [25:38] is the sub-list for method output_type
+	12, // [12:25] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name

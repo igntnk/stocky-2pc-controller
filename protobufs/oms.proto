@@ -61,10 +61,10 @@ service ProductService {
 
 
 enum OrderStatus {
-  NEW = 0;
-  PROCESSING = 1;
-  COMPLETED = 2;
-  CANCELLED = 3;
+  new = 0;
+  processing = 1;
+  completed = 2;
+  canceled = 3;
 }
 
 message Order {
@@ -135,4 +135,5 @@ service OrderService {
   rpc Update(UpdateOrderRequest) returns (Order);
   rpc Delete(DeleteOrderRequest) returns (google.protobuf.Empty);
   rpc GetProducts(GetProductsRequest) returns (ListResponse);
+  rpc TCCCreateOrder(stream CreateOrderRequest) returns (stream Order);
 }
