@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package scs;
 
-option go_package = "github.com/igntnk/stocky-scs/proto/scs_pb";
+option go_package = "github.com/igntnk/stocky-2pc-controller/proto/scs_pb";
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (IdResponse);

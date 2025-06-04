@@ -20,11 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_CreateProduct_FullMethodName  = "/sms.ProductService/CreateProduct"
-	ProductService_DeleteProduct_FullMethodName  = "/sms.ProductService/DeleteProduct"
-	ProductService_SetStoreCost_FullMethodName   = "/sms.ProductService/SetStoreCost"
-	ProductService_SetStoreAmount_FullMethodName = "/sms.ProductService/SetStoreAmount"
-	ProductService_GetStoreAmount_FullMethodName = "/sms.ProductService/GetStoreAmount"
+	ProductService_CreateProduct_FullMethodName         = "/sms.ProductService/CreateProduct"
+	ProductService_DeleteProduct_FullMethodName         = "/sms.ProductService/DeleteProduct"
+	ProductService_SetStoreCost_FullMethodName          = "/sms.ProductService/SetStoreCost"
+	ProductService_SetStoreAmount_FullMethodName        = "/sms.ProductService/SetStoreAmount"
+	ProductService_GetStoreAmount_FullMethodName        = "/sms.ProductService/GetStoreAmount"
+	ProductService_RemoveCoupleProducts_FullMethodName  = "/sms.ProductService/RemoveCoupleProducts"
+	ProductService_WriteOnCoupleProducts_FullMethodName = "/sms.ProductService/WriteOnCoupleProducts"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -36,6 +38,8 @@ type ProductServiceClient interface {
 	SetStoreCost(ctx context.Context, in *SetProductCostRequest, opts ...grpc.CallOption) (*UuidResponse, error)
 	SetStoreAmount(ctx context.Context, in *SetProductAmountRequest, opts ...grpc.CallOption) (*UuidResponse, error)
 	GetStoreAmount(ctx context.Context, in *UuidRequest, opts ...grpc.CallOption) (*GetStoreAmountResponse, error)
+	RemoveCoupleProducts(ctx context.Context, in *RemoveProductsRequest, opts ...grpc.CallOption) (*CoupleUuidResponse, error)
+	WriteOnCoupleProducts(ctx context.Context, in *RemoveProductsRequest, opts ...grpc.CallOption) (*CoupleUuidResponse, error)
 }
 
 type productServiceClient struct {
@@ -96,6 +100,26 @@ func (c *productServiceClient) GetStoreAmount(ctx context.Context, in *UuidReque
 	return out, nil
 }
 
+func (c *productServiceClient) RemoveCoupleProducts(ctx context.Context, in *RemoveProductsRequest, opts ...grpc.CallOption) (*CoupleUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CoupleUuidResponse)
+	err := c.cc.Invoke(ctx, ProductService_RemoveCoupleProducts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productServiceClient) WriteOnCoupleProducts(ctx context.Context, in *RemoveProductsRequest, opts ...grpc.CallOption) (*CoupleUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CoupleUuidResponse)
+	err := c.cc.Invoke(ctx, ProductService_WriteOnCoupleProducts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
@@ -105,6 +129,8 @@ type ProductServiceServer interface {
 	SetStoreCost(context.Context, *SetProductCostRequest) (*UuidResponse, error)
 	SetStoreAmount(context.Context, *SetProductAmountRequest) (*UuidResponse, error)
 	GetStoreAmount(context.Context, *UuidRequest) (*GetStoreAmountResponse, error)
+	RemoveCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error)
+	WriteOnCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -129,6 +155,12 @@ func (UnimplementedProductServiceServer) SetStoreAmount(context.Context, *SetPro
 }
 func (UnimplementedProductServiceServer) GetStoreAmount(context.Context, *UuidRequest) (*GetStoreAmountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStoreAmount not implemented")
+}
+func (UnimplementedProductServiceServer) RemoveCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveCoupleProducts not implemented")
+}
+func (UnimplementedProductServiceServer) WriteOnCoupleProducts(context.Context, *RemoveProductsRequest) (*CoupleUuidResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WriteOnCoupleProducts not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 func (UnimplementedProductServiceServer) testEmbeddedByValue()                        {}
@@ -241,6 +273,42 @@ func _ProductService_GetStoreAmount_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_RemoveCoupleProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).RemoveCoupleProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_RemoveCoupleProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).RemoveCoupleProducts(ctx, req.(*RemoveProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductService_WriteOnCoupleProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).WriteOnCoupleProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_WriteOnCoupleProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).WriteOnCoupleProducts(ctx, req.(*RemoveProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -267,6 +335,14 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetStoreAmount",
 			Handler:    _ProductService_GetStoreAmount_Handler,
+		},
+		{
+			MethodName: "RemoveCoupleProducts",
+			Handler:    _ProductService_RemoveCoupleProducts_Handler,
+		},
+		{
+			MethodName: "WriteOnCoupleProducts",
+			Handler:    _ProductService_WriteOnCoupleProducts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

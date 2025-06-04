@@ -447,7 +447,7 @@ const file_scs_proto_rawDesc = "" +
 	"\n" +
 	"UpdateUser\x12\x16.scs.UpdateUserRequest\x1a\x0f.scs.IdResponse\x12)\n" +
 	"\aGetById\x12\x0e.scs.IdRequest\x1a\x0e.scs.UserModel\x12?\n" +
-	"\vGetAllUsers\x12\x16.google.protobuf.Empty\x1a\x18.scs.GetAllUsersResponseB+Z)github.com/igntnk/stocky-scs/proto/scs_pbb\x06proto3"
+	"\vGetAllUsers\x12\x16.google.protobuf.Empty\x1a\x18.scs.GetAllUsersResponseB6Z4github.com/igntnk/stocky-2pc-controller/proto/scs_pbb\x06proto3"
 
 var (
 	file_scs_proto_rawDescOnce sync.Once
