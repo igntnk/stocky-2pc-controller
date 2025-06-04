@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package iims;
 
-option go_package = "github.com/igntnk/stocky_iims/proto/iims_pb";
+option go_package = "github.com/igntnk/stocky-2pc-controller/proto/iims_pb";
 
 service ProductService {
   rpc InsertOne(InsertProductRequest) returns (InsertProductResponse) {};

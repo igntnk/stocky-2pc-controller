@@ -1234,7 +1234,7 @@ const file_oms_proto_rawDesc = "" +
 	"\x06Update\x12\x17.oms.UpdateOrderRequest\x1a\n" +
 	".oms.Order\x129\n" +
 	"\x06Delete\x12\x17.oms.DeleteOrderRequest\x1a\x16.google.protobuf.Empty\x129\n" +
-	"\vGetProducts\x12\x17.oms.GetProductsRequest\x1a\x11.oms.ListResponseB+Z)github.com/igntnk/stocky-oms/proto/oms_pbb\x06proto3"
+	"\vGetProducts\x12\x17.oms.GetProductsRequest\x1a\x11.oms.ListResponseB6Z4github.com/igntnk/stocky-2pc-controller/proto/oms_pbb\x06proto3"
 
 var (
 	file_oms_proto_rawDescOnce sync.Once

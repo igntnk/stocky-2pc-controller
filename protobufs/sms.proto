@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package sms;
 
-option go_package = "github.com/igntnk/stocky-sms/proto/sms_pb";
+option go_package = "github.com/igntnk/stocky-2pc-controller/proto/sms_pb";
 
 service ProductService {
   rpc CreateProduct(CreateProductMessage) returns (UuidResponse);
@@ -12,10 +12,16 @@ service ProductService {
   rpc SetStoreCost(SetProductCostRequest) returns (UuidResponse);
   rpc SetStoreAmount(SetProductAmountRequest) returns (UuidResponse);
   rpc GetStoreAmount(UuidRequest) returns (GetStoreAmountResponse);
+  rpc RemoveCoupleProducts(RemoveProductsRequest) returns (CoupleUuidResponse);
+  rpc WriteOnCoupleProducts(RemoveProductsRequest) returns (CoupleUuidResponse);
 }
 
 message CreateProductMessage {
   float storeCost = 1;
+}
+
+message CoupleUuidResponse {
+  repeated string uuids = 1;
 }
 
 message UuidResponse {
@@ -29,6 +35,10 @@ message UuidRequest {
 message SetProductCostRequest {
   string uuid = 1;
   float storeCost = 2;
+}
+
+message RemoveProductsRequest {
+  repeated SetProductAmountRequest products = 1;
 }
 
 message SetProductAmountRequest {

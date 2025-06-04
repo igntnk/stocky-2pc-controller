@@ -5,7 +5,7 @@ package oms;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/igntnk/stocky-oms/proto/oms_pb";
+option go_package = "github.com/igntnk/stocky-2pc-controller/proto/oms_pb";
 
 message Product {
   string uuid = 1;

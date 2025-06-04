@@ -66,6 +66,50 @@ func (x *CreateProductMessage) GetStoreCost() float32 {
 	return 0
 }
 
+type CoupleUuidResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uuids         []string               `protobuf:"bytes,1,rep,name=uuids,proto3" json:"uuids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoupleUuidResponse) Reset() {
+	*x = CoupleUuidResponse{}
+	mi := &file_sms_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoupleUuidResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoupleUuidResponse) ProtoMessage() {}
+
+func (x *CoupleUuidResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sms_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoupleUuidResponse.ProtoReflect.Descriptor instead.
+func (*CoupleUuidResponse) Descriptor() ([]byte, []int) {
+	return file_sms_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CoupleUuidResponse) GetUuids() []string {
+	if x != nil {
+		return x.Uuids
+	}
+	return nil
+}
+
 type UuidResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -75,7 +119,7 @@ type UuidResponse struct {
 
 func (x *UuidResponse) Reset() {
 	*x = UuidResponse{}
-	mi := &file_sms_proto_msgTypes[1]
+	mi := &file_sms_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +131,7 @@ func (x *UuidResponse) String() string {
 func (*UuidResponse) ProtoMessage() {}
 
 func (x *UuidResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[1]
+	mi := &file_sms_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +144,7 @@ func (x *UuidResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UuidResponse.ProtoReflect.Descriptor instead.
 func (*UuidResponse) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{1}
+	return file_sms_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UuidResponse) GetUuid() string {
@@ -119,7 +163,7 @@ type UuidRequest struct {
 
 func (x *UuidRequest) Reset() {
 	*x = UuidRequest{}
-	mi := &file_sms_proto_msgTypes[2]
+	mi := &file_sms_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +175,7 @@ func (x *UuidRequest) String() string {
 func (*UuidRequest) ProtoMessage() {}
 
 func (x *UuidRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[2]
+	mi := &file_sms_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,7 +188,7 @@ func (x *UuidRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UuidRequest.ProtoReflect.Descriptor instead.
 func (*UuidRequest) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{2}
+	return file_sms_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UuidRequest) GetUuid() string {
@@ -164,7 +208,7 @@ type SetProductCostRequest struct {
 
 func (x *SetProductCostRequest) Reset() {
 	*x = SetProductCostRequest{}
-	mi := &file_sms_proto_msgTypes[3]
+	mi := &file_sms_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +220,7 @@ func (x *SetProductCostRequest) String() string {
 func (*SetProductCostRequest) ProtoMessage() {}
 
 func (x *SetProductCostRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[3]
+	mi := &file_sms_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +233,7 @@ func (x *SetProductCostRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetProductCostRequest.ProtoReflect.Descriptor instead.
 func (*SetProductCostRequest) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{3}
+	return file_sms_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SetProductCostRequest) GetUuid() string {
@@ -206,6 +250,50 @@ func (x *SetProductCostRequest) GetStoreCost() float32 {
 	return 0
 }
 
+type RemoveProductsRequest struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Products      []*SetProductAmountRequest `protobuf:"bytes,1,rep,name=products,proto3" json:"products,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveProductsRequest) Reset() {
+	*x = RemoveProductsRequest{}
+	mi := &file_sms_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveProductsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveProductsRequest) ProtoMessage() {}
+
+func (x *RemoveProductsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sms_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveProductsRequest.ProtoReflect.Descriptor instead.
+func (*RemoveProductsRequest) Descriptor() ([]byte, []int) {
+	return file_sms_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RemoveProductsRequest) GetProducts() []*SetProductAmountRequest {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
 type SetProductAmountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
@@ -216,7 +304,7 @@ type SetProductAmountRequest struct {
 
 func (x *SetProductAmountRequest) Reset() {
 	*x = SetProductAmountRequest{}
-	mi := &file_sms_proto_msgTypes[4]
+	mi := &file_sms_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -228,7 +316,7 @@ func (x *SetProductAmountRequest) String() string {
 func (*SetProductAmountRequest) ProtoMessage() {}
 
 func (x *SetProductAmountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[4]
+	mi := &file_sms_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +329,7 @@ func (x *SetProductAmountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetProductAmountRequest.ProtoReflect.Descriptor instead.
 func (*SetProductAmountRequest) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{4}
+	return file_sms_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SetProductAmountRequest) GetUuid() string {
@@ -267,7 +355,7 @@ type GetStoreAmountResponse struct {
 
 func (x *GetStoreAmountResponse) Reset() {
 	*x = GetStoreAmountResponse{}
-	mi := &file_sms_proto_msgTypes[5]
+	mi := &file_sms_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +367,7 @@ func (x *GetStoreAmountResponse) String() string {
 func (*GetStoreAmountResponse) ProtoMessage() {}
 
 func (x *GetStoreAmountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[5]
+	mi := &file_sms_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +380,7 @@ func (x *GetStoreAmountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStoreAmountResponse.ProtoReflect.Descriptor instead.
 func (*GetStoreAmountResponse) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{5}
+	return file_sms_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetStoreAmountResponse) GetStoreAmount() float32 {
@@ -312,7 +400,7 @@ type SupplyProductModel struct {
 
 func (x *SupplyProductModel) Reset() {
 	*x = SupplyProductModel{}
-	mi := &file_sms_proto_msgTypes[6]
+	mi := &file_sms_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +412,7 @@ func (x *SupplyProductModel) String() string {
 func (*SupplyProductModel) ProtoMessage() {}
 
 func (x *SupplyProductModel) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[6]
+	mi := &file_sms_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +425,7 @@ func (x *SupplyProductModel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplyProductModel.ProtoReflect.Descriptor instead.
 func (*SupplyProductModel) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{6}
+	return file_sms_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SupplyProductModel) GetProductUuid() string {
@@ -367,7 +455,7 @@ type CreateSupplyRequest struct {
 
 func (x *CreateSupplyRequest) Reset() {
 	*x = CreateSupplyRequest{}
-	mi := &file_sms_proto_msgTypes[7]
+	mi := &file_sms_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -379,7 +467,7 @@ func (x *CreateSupplyRequest) String() string {
 func (*CreateSupplyRequest) ProtoMessage() {}
 
 func (x *CreateSupplyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[7]
+	mi := &file_sms_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -392,7 +480,7 @@ func (x *CreateSupplyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSupplyRequest.ProtoReflect.Descriptor instead.
 func (*CreateSupplyRequest) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{7}
+	return file_sms_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateSupplyRequest) GetSupplyCost() float32 {
@@ -444,7 +532,7 @@ type UpdateSupplyInfoRequest struct {
 
 func (x *UpdateSupplyInfoRequest) Reset() {
 	*x = UpdateSupplyInfoRequest{}
-	mi := &file_sms_proto_msgTypes[8]
+	mi := &file_sms_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -456,7 +544,7 @@ func (x *UpdateSupplyInfoRequest) String() string {
 func (*UpdateSupplyInfoRequest) ProtoMessage() {}
 
 func (x *UpdateSupplyInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[8]
+	mi := &file_sms_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -469,7 +557,7 @@ func (x *UpdateSupplyInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSupplyInfoRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSupplyInfoRequest) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{8}
+	return file_sms_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateSupplyInfoRequest) GetUuid() string {
@@ -528,7 +616,7 @@ type SupplyModel struct {
 
 func (x *SupplyModel) Reset() {
 	*x = SupplyModel{}
-	mi := &file_sms_proto_msgTypes[9]
+	mi := &file_sms_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -540,7 +628,7 @@ func (x *SupplyModel) String() string {
 func (*SupplyModel) ProtoMessage() {}
 
 func (x *SupplyModel) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[9]
+	mi := &file_sms_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -553,7 +641,7 @@ func (x *SupplyModel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplyModel.ProtoReflect.Descriptor instead.
 func (*SupplyModel) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{9}
+	return file_sms_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SupplyModel) GetUuid() string {
@@ -607,7 +695,7 @@ type GetActiveSuppliesResponse struct {
 
 func (x *GetActiveSuppliesResponse) Reset() {
 	*x = GetActiveSuppliesResponse{}
-	mi := &file_sms_proto_msgTypes[10]
+	mi := &file_sms_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -619,7 +707,7 @@ func (x *GetActiveSuppliesResponse) String() string {
 func (*GetActiveSuppliesResponse) ProtoMessage() {}
 
 func (x *GetActiveSuppliesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sms_proto_msgTypes[10]
+	mi := &file_sms_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -632,7 +720,7 @@ func (x *GetActiveSuppliesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetActiveSuppliesResponse.ProtoReflect.Descriptor instead.
 func (*GetActiveSuppliesResponse) Descriptor() ([]byte, []int) {
-	return file_sms_proto_rawDescGZIP(), []int{10}
+	return file_sms_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetActiveSuppliesResponse) GetSupplies() []*SupplyModel {
@@ -648,14 +736,18 @@ const file_sms_proto_rawDesc = "" +
 	"\n" +
 	"\tsms.proto\x12\x03sms\x1a\x1bgoogle/protobuf/empty.proto\"4\n" +
 	"\x14CreateProductMessage\x12\x1c\n" +
-	"\tstoreCost\x18\x01 \x01(\x02R\tstoreCost\"\"\n" +
+	"\tstoreCost\x18\x01 \x01(\x02R\tstoreCost\"*\n" +
+	"\x12CoupleUuidResponse\x12\x14\n" +
+	"\x05uuids\x18\x01 \x03(\tR\x05uuids\"\"\n" +
 	"\fUuidResponse\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"!\n" +
 	"\vUuidRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"I\n" +
 	"\x15SetProductCostRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1c\n" +
-	"\tstoreCost\x18\x02 \x01(\x02R\tstoreCost\"O\n" +
+	"\tstoreCost\x18\x02 \x01(\x02R\tstoreCost\"Q\n" +
+	"\x15RemoveProductsRequest\x128\n" +
+	"\bproducts\x18\x01 \x03(\v2\x1c.sms.SetProductAmountRequestR\bproducts\"O\n" +
 	"\x17SetProductAmountRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12 \n" +
 	"\vstoreAmount\x18\x02 \x01(\x02R\vstoreAmount\":\n" +
@@ -687,19 +779,21 @@ const file_sms_proto_rawDesc = "" +
 	"\x0fresponsibleUser\x18\x05 \x01(\tR\x0fresponsibleUser\x12\x12\n" +
 	"\x04cost\x18\x06 \x01(\x02R\x04cost\"I\n" +
 	"\x19GetActiveSuppliesResponse\x12,\n" +
-	"\bsupplies\x18\x01 \x03(\v2\x10.sms.SupplyModelR\bsupplies2\xc8\x02\n" +
+	"\bsupplies\x18\x01 \x03(\v2\x10.sms.SupplyModelR\bsupplies2\xe3\x03\n" +
 	"\x0eProductService\x12=\n" +
 	"\rCreateProduct\x12\x19.sms.CreateProductMessage\x1a\x11.sms.UuidResponse\x124\n" +
 	"\rDeleteProduct\x12\x10.sms.UuidRequest\x1a\x11.sms.UuidResponse\x12=\n" +
 	"\fSetStoreCost\x12\x1a.sms.SetProductCostRequest\x1a\x11.sms.UuidResponse\x12A\n" +
 	"\x0eSetStoreAmount\x12\x1c.sms.SetProductAmountRequest\x1a\x11.sms.UuidResponse\x12?\n" +
-	"\x0eGetStoreAmount\x12\x10.sms.UuidRequest\x1a\x1b.sms.GetStoreAmountResponse2\xc8\x02\n" +
+	"\x0eGetStoreAmount\x12\x10.sms.UuidRequest\x1a\x1b.sms.GetStoreAmountResponse\x12K\n" +
+	"\x14RemoveCoupleProducts\x12\x1a.sms.RemoveProductsRequest\x1a\x17.sms.CoupleUuidResponse\x12L\n" +
+	"\x15WriteOnCoupleProducts\x12\x1a.sms.RemoveProductsRequest\x1a\x17.sms.CoupleUuidResponse2\xc8\x02\n" +
 	"\rSupplyService\x12;\n" +
 	"\fCreateSupply\x12\x18.sms.CreateSupplyRequest\x1a\x11.sms.UuidResponse\x123\n" +
 	"\fDeleteSupply\x12\x10.sms.UuidRequest\x1a\x11.sms.UuidResponse\x12C\n" +
 	"\x10UpdateSupplyInfo\x12\x1c.sms.UpdateSupplyInfoRequest\x1a\x11.sms.UuidResponse\x12K\n" +
 	"\x11GetActiveSupplies\x12\x16.google.protobuf.Empty\x1a\x1e.sms.GetActiveSuppliesResponse\x123\n" +
-	"\rGetSupplyById\x12\x10.sms.UuidRequest\x1a\x10.sms.SupplyModelB+Z)github.com/igntnk/stocky-sms/proto/sms_pbb\x06proto3"
+	"\rGetSupplyById\x12\x10.sms.UuidRequest\x1a\x10.sms.SupplyModelB6Z4github.com/igntnk/stocky-2pc-controller/proto/sms_pbb\x06proto3"
 
 var (
 	file_sms_proto_rawDescOnce sync.Once
@@ -713,49 +807,56 @@ func file_sms_proto_rawDescGZIP() []byte {
 	return file_sms_proto_rawDescData
 }
 
-var file_sms_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_sms_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_sms_proto_goTypes = []any{
 	(*CreateProductMessage)(nil),      // 0: sms.CreateProductMessage
-	(*UuidResponse)(nil),              // 1: sms.UuidResponse
-	(*UuidRequest)(nil),               // 2: sms.UuidRequest
-	(*SetProductCostRequest)(nil),     // 3: sms.SetProductCostRequest
-	(*SetProductAmountRequest)(nil),   // 4: sms.SetProductAmountRequest
-	(*GetStoreAmountResponse)(nil),    // 5: sms.GetStoreAmountResponse
-	(*SupplyProductModel)(nil),        // 6: sms.SupplyProductModel
-	(*CreateSupplyRequest)(nil),       // 7: sms.CreateSupplyRequest
-	(*UpdateSupplyInfoRequest)(nil),   // 8: sms.UpdateSupplyInfoRequest
-	(*SupplyModel)(nil),               // 9: sms.SupplyModel
-	(*GetActiveSuppliesResponse)(nil), // 10: sms.GetActiveSuppliesResponse
-	(*emptypb.Empty)(nil),             // 11: google.protobuf.Empty
+	(*CoupleUuidResponse)(nil),        // 1: sms.CoupleUuidResponse
+	(*UuidResponse)(nil),              // 2: sms.UuidResponse
+	(*UuidRequest)(nil),               // 3: sms.UuidRequest
+	(*SetProductCostRequest)(nil),     // 4: sms.SetProductCostRequest
+	(*RemoveProductsRequest)(nil),     // 5: sms.RemoveProductsRequest
+	(*SetProductAmountRequest)(nil),   // 6: sms.SetProductAmountRequest
+	(*GetStoreAmountResponse)(nil),    // 7: sms.GetStoreAmountResponse
+	(*SupplyProductModel)(nil),        // 8: sms.SupplyProductModel
+	(*CreateSupplyRequest)(nil),       // 9: sms.CreateSupplyRequest
+	(*UpdateSupplyInfoRequest)(nil),   // 10: sms.UpdateSupplyInfoRequest
+	(*SupplyModel)(nil),               // 11: sms.SupplyModel
+	(*GetActiveSuppliesResponse)(nil), // 12: sms.GetActiveSuppliesResponse
+	(*emptypb.Empty)(nil),             // 13: google.protobuf.Empty
 }
 var file_sms_proto_depIdxs = []int32{
-	6,  // 0: sms.CreateSupplyRequest.products:type_name -> sms.SupplyProductModel
-	9,  // 1: sms.GetActiveSuppliesResponse.supplies:type_name -> sms.SupplyModel
-	0,  // 2: sms.ProductService.CreateProduct:input_type -> sms.CreateProductMessage
-	2,  // 3: sms.ProductService.DeleteProduct:input_type -> sms.UuidRequest
-	3,  // 4: sms.ProductService.SetStoreCost:input_type -> sms.SetProductCostRequest
-	4,  // 5: sms.ProductService.SetStoreAmount:input_type -> sms.SetProductAmountRequest
-	2,  // 6: sms.ProductService.GetStoreAmount:input_type -> sms.UuidRequest
-	7,  // 7: sms.SupplyService.CreateSupply:input_type -> sms.CreateSupplyRequest
-	2,  // 8: sms.SupplyService.DeleteSupply:input_type -> sms.UuidRequest
-	8,  // 9: sms.SupplyService.UpdateSupplyInfo:input_type -> sms.UpdateSupplyInfoRequest
-	11, // 10: sms.SupplyService.GetActiveSupplies:input_type -> google.protobuf.Empty
-	2,  // 11: sms.SupplyService.GetSupplyById:input_type -> sms.UuidRequest
-	1,  // 12: sms.ProductService.CreateProduct:output_type -> sms.UuidResponse
-	1,  // 13: sms.ProductService.DeleteProduct:output_type -> sms.UuidResponse
-	1,  // 14: sms.ProductService.SetStoreCost:output_type -> sms.UuidResponse
-	1,  // 15: sms.ProductService.SetStoreAmount:output_type -> sms.UuidResponse
-	5,  // 16: sms.ProductService.GetStoreAmount:output_type -> sms.GetStoreAmountResponse
-	1,  // 17: sms.SupplyService.CreateSupply:output_type -> sms.UuidResponse
-	1,  // 18: sms.SupplyService.DeleteSupply:output_type -> sms.UuidResponse
-	1,  // 19: sms.SupplyService.UpdateSupplyInfo:output_type -> sms.UuidResponse
-	10, // 20: sms.SupplyService.GetActiveSupplies:output_type -> sms.GetActiveSuppliesResponse
-	9,  // 21: sms.SupplyService.GetSupplyById:output_type -> sms.SupplyModel
-	12, // [12:22] is the sub-list for method output_type
-	2,  // [2:12] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	6,  // 0: sms.RemoveProductsRequest.products:type_name -> sms.SetProductAmountRequest
+	8,  // 1: sms.CreateSupplyRequest.products:type_name -> sms.SupplyProductModel
+	11, // 2: sms.GetActiveSuppliesResponse.supplies:type_name -> sms.SupplyModel
+	0,  // 3: sms.ProductService.CreateProduct:input_type -> sms.CreateProductMessage
+	3,  // 4: sms.ProductService.DeleteProduct:input_type -> sms.UuidRequest
+	4,  // 5: sms.ProductService.SetStoreCost:input_type -> sms.SetProductCostRequest
+	6,  // 6: sms.ProductService.SetStoreAmount:input_type -> sms.SetProductAmountRequest
+	3,  // 7: sms.ProductService.GetStoreAmount:input_type -> sms.UuidRequest
+	5,  // 8: sms.ProductService.RemoveCoupleProducts:input_type -> sms.RemoveProductsRequest
+	5,  // 9: sms.ProductService.WriteOnCoupleProducts:input_type -> sms.RemoveProductsRequest
+	9,  // 10: sms.SupplyService.CreateSupply:input_type -> sms.CreateSupplyRequest
+	3,  // 11: sms.SupplyService.DeleteSupply:input_type -> sms.UuidRequest
+	10, // 12: sms.SupplyService.UpdateSupplyInfo:input_type -> sms.UpdateSupplyInfoRequest
+	13, // 13: sms.SupplyService.GetActiveSupplies:input_type -> google.protobuf.Empty
+	3,  // 14: sms.SupplyService.GetSupplyById:input_type -> sms.UuidRequest
+	2,  // 15: sms.ProductService.CreateProduct:output_type -> sms.UuidResponse
+	2,  // 16: sms.ProductService.DeleteProduct:output_type -> sms.UuidResponse
+	2,  // 17: sms.ProductService.SetStoreCost:output_type -> sms.UuidResponse
+	2,  // 18: sms.ProductService.SetStoreAmount:output_type -> sms.UuidResponse
+	7,  // 19: sms.ProductService.GetStoreAmount:output_type -> sms.GetStoreAmountResponse
+	1,  // 20: sms.ProductService.RemoveCoupleProducts:output_type -> sms.CoupleUuidResponse
+	1,  // 21: sms.ProductService.WriteOnCoupleProducts:output_type -> sms.CoupleUuidResponse
+	2,  // 22: sms.SupplyService.CreateSupply:output_type -> sms.UuidResponse
+	2,  // 23: sms.SupplyService.DeleteSupply:output_type -> sms.UuidResponse
+	2,  // 24: sms.SupplyService.UpdateSupplyInfo:output_type -> sms.UuidResponse
+	12, // 25: sms.SupplyService.GetActiveSupplies:output_type -> sms.GetActiveSuppliesResponse
+	11, // 26: sms.SupplyService.GetSupplyById:output_type -> sms.SupplyModel
+	15, // [15:27] is the sub-list for method output_type
+	3,  // [3:15] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_sms_proto_init() }
@@ -769,7 +870,7 @@ func file_sms_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sms_proto_rawDesc), len(file_sms_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

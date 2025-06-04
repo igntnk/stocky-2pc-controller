@@ -1078,7 +1078,7 @@ const file_iims_proto_rawDesc = "" +
 	"\x06Delete\x12\x17.iims.DeleteSaleRequest\x1a\x16.google.protobuf.Empty\"\x00\x12;\n" +
 	"\x06Update\x12\x17.iims.UpdateSaleRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
 	"\tBlockSale\x12\x1f.iims.BlockSaleOperationMessage\x1a\x16.google.protobuf.Empty\"\x00\x12H\n" +
-	"\vUnblockSale\x12\x1f.iims.BlockSaleOperationMessage\x1a\x16.google.protobuf.Empty\"\x00B-Z+github.com/igntnk/stocky_iims/proto/iims_pbb\x06proto3"
+	"\vUnblockSale\x12\x1f.iims.BlockSaleOperationMessage\x1a\x16.google.protobuf.Empty\"\x00B7Z5github.com/igntnk/stocky-2pc-controller/proto/iims_pbb\x06proto3"
 
 var (
 	file_iims_proto_rawDescOnce sync.Once
