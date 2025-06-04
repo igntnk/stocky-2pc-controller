@@ -12,6 +12,7 @@ import (
 
 type OrderService interface {
 	CreateOrder(ctx context.Context, comment, userId, staffId string, products []*clients.OrderProductInput) (models.Order, error)
+	TccCreateOrder(ctx context.Context, req models.OrderCreateRequest) (*models.OrderResponse, error)
 }
 
 func NewOrderService(oms clients.OMSClient,
@@ -98,5 +99,46 @@ func (o orderService) CreateOrder(ctx context.Context, comment, userId, staffId 
 		StaffId:  order.StaffId,
 		Price:    order.OrderCost,
 		Products: resultProducts,
+	}, nil
+}
+
+func (s *orderService) TccCreateOrder(ctx context.Context, req models.OrderCreateRequest) (*models.OrderResponse, error) {
+	products := make([]*oms_pb.OrderProductInput, len(req.Products))
+	for i, product := range req.Products {
+		products[i] = &oms_pb.OrderProductInput{
+			ProductUuid: product.ProductID.String(),
+			Amount:      int32(product.Amount),
+		}
+	}
+
+	res, err := s.OMSClient.TCCOrderCreation(ctx, &oms_pb.CreateOrderRequest{
+		Comment:  req.Comment,
+		UserId:   req.UserID,
+		StaffId:  req.StaffID,
+		Products: products,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	resProducts := make([]models.ProductDetail, len(res.Products))
+	for i, product := range res.Products {
+		resProducts[i] = models.ProductDetail{
+			Price:       product.ResultPrice,
+			ProductCode: product.ProductCode,
+			Amount:      int(product.Amount),
+			TotalPrice:  product.ResultPrice * float64(product.Amount),
+		}
+	}
+
+	return &models.OrderResponse{
+		ID:           res.Uuid,
+		Comment:      res.Comment,
+		UserID:       res.UserId,
+		StaffID:      res.StaffId,
+		OrderCost:    res.OrderCost,
+		Status:       models.OrderStatusNew,
+		CreationDate: res.CreationDate.String(),
+		Products:     resProducts,
 	}, nil
 }

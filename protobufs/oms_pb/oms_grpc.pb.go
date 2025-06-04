@@ -312,12 +312,13 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderService_Create_FullMethodName      = "/oms.OrderService/Create"
-	OrderService_Get_FullMethodName         = "/oms.OrderService/Get"
-	OrderService_List_FullMethodName        = "/oms.OrderService/List"
-	OrderService_Update_FullMethodName      = "/oms.OrderService/Update"
-	OrderService_Delete_FullMethodName      = "/oms.OrderService/Delete"
-	OrderService_GetProducts_FullMethodName = "/oms.OrderService/GetProducts"
+	OrderService_Create_FullMethodName         = "/oms.OrderService/Create"
+	OrderService_Get_FullMethodName            = "/oms.OrderService/Get"
+	OrderService_List_FullMethodName           = "/oms.OrderService/List"
+	OrderService_Update_FullMethodName         = "/oms.OrderService/Update"
+	OrderService_Delete_FullMethodName         = "/oms.OrderService/Delete"
+	OrderService_GetProducts_FullMethodName    = "/oms.OrderService/GetProducts"
+	OrderService_TCCCreateOrder_FullMethodName = "/oms.OrderService/TCCCreateOrder"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -330,6 +331,7 @@ type OrderServiceClient interface {
 	Update(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*Order, error)
 	Delete(ctx context.Context, in *DeleteOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetProducts(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ListResponse, error)
+	TCCCreateOrder(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[CreateOrderRequest, Order], error)
 }
 
 type orderServiceClient struct {
@@ -400,6 +402,19 @@ func (c *orderServiceClient) GetProducts(ctx context.Context, in *GetProductsReq
 	return out, nil
 }
 
+func (c *orderServiceClient) TCCCreateOrder(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[CreateOrderRequest, Order], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &OrderService_ServiceDesc.Streams[0], OrderService_TCCCreateOrder_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[CreateOrderRequest, Order]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type OrderService_TCCCreateOrderClient = grpc.BidiStreamingClient[CreateOrderRequest, Order]
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility.
@@ -410,6 +425,7 @@ type OrderServiceServer interface {
 	Update(context.Context, *UpdateOrderRequest) (*Order, error)
 	Delete(context.Context, *DeleteOrderRequest) (*emptypb.Empty, error)
 	GetProducts(context.Context, *GetProductsRequest) (*ListResponse, error)
+	TCCCreateOrder(grpc.BidiStreamingServer[CreateOrderRequest, Order]) error
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -437,6 +453,9 @@ func (UnimplementedOrderServiceServer) Delete(context.Context, *DeleteOrderReque
 }
 func (UnimplementedOrderServiceServer) GetProducts(context.Context, *GetProductsRequest) (*ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProducts not implemented")
+}
+func (UnimplementedOrderServiceServer) TCCCreateOrder(grpc.BidiStreamingServer[CreateOrderRequest, Order]) error {
+	return status.Errorf(codes.Unimplemented, "method TCCCreateOrder not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 func (UnimplementedOrderServiceServer) testEmbeddedByValue()                      {}
@@ -567,6 +586,13 @@ func _OrderService_GetProducts_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_TCCCreateOrder_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(OrderServiceServer).TCCCreateOrder(&grpc.GenericServerStream[CreateOrderRequest, Order]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type OrderService_TCCCreateOrderServer = grpc.BidiStreamingServer[CreateOrderRequest, Order]
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -599,6 +625,13 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OrderService_GetProducts_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "TCCCreateOrder",
+			Handler:       _OrderService_TCCCreateOrder_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "oms.proto",
 }

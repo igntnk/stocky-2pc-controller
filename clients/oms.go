@@ -21,6 +21,7 @@ type OMSClient interface {
 		comment, userID, staffID string,
 		products []*OrderProductInput,
 	) (*oms_pb.Order, error)
+	TCCOrderCreation(ctx context.Context, order *oms_pb.CreateOrderRequest) (*oms_pb.Order, error)
 	GetOrder(ctx context.Context, uuid string) (*oms_pb.Order, error)
 	ListOrders(ctx context.Context, limit, offset int32, status oms_pb.OrderStatus) ([]*oms_pb.Order, error)
 	UpdateOrder(ctx context.Context, uuid string, comment *string, status *oms_pb.OrderStatus) (*oms_pb.Order, error)
@@ -47,6 +48,26 @@ func NewOMSClient(conn *grpc.ClientConn) OMSClient {
 type omsClient struct {
 	orderClient   oms_pb.OrderServiceClient
 	productClient oms_pb.ProductServiceClient
+}
+
+func (c *omsClient) TCCOrderCreation(ctx context.Context, order *oms_pb.CreateOrderRequest) (*oms_pb.Order, error) {
+	stream, err := c.orderClient.TCCCreateOrder(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// Empty message for freeze resources
+	err = stream.Send(&oms_pb.CreateOrderRequest{})
+	if err != nil {
+		return nil, err
+	}
+
+	err = stream.Send(order)
+	if err != nil {
+		return nil, err
+	}
+
+	return stream.Recv()
 }
 
 // Product methods implementation

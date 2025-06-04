@@ -5,6 +5,7 @@ go 1.23.6
 require (
 	github.com/eapache/go-resiliency v1.7.0
 	github.com/gin-gonic/gin v1.10.1
+	github.com/google/uuid v1.6.0
 	github.com/rs/zerolog v1.34.0
 	github.com/spf13/viper v1.20.1
 	google.golang.org/grpc v1.72.2

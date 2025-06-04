@@ -14,6 +14,7 @@ service ProductService {
   rpc GetStoreAmount(UuidRequest) returns (GetStoreAmountResponse);
   rpc RemoveCoupleProducts(RemoveProductsRequest) returns (CoupleUuidResponse);
   rpc WriteOnCoupleProducts(RemoveProductsRequest) returns (CoupleUuidResponse);
+  rpc ChangeCoupleProductAmount(stream RemoveProductsRequest) returns (stream CoupleUuidResponse);
 }
 
 message CreateProductMessage {
@@ -60,7 +61,7 @@ service SupplyService {
   rpc DeleteSupply(UuidRequest) returns (UuidResponse) ;
   rpc UpdateSupplyInfo(UpdateSupplyInfoRequest) returns(UuidResponse) ;
   rpc GetActiveSupplies(google.protobuf.Empty) returns(GetActiveSuppliesResponse) ;
-  rpc GetSupplyById(UuidRequest) returns (SupplyModel) ;
+  rpc GetSupplyById(UuidRequest) returns (SupplyModel);
 }
 
 message CreateSupplyRequest {
